@@ -426,3 +426,66 @@ footer p {
         transform: translateY(0); /* Termina na posição normal */
     }
 }
+
+@media (max-width: 768px) {
+
+    /* --- AJUSTES NO CABEÇALHO --- */
+    header .container {
+        flex-direction: column; /* Coloca a logo e o menu um em cima do outro */
+        gap: 15px; /* Adiciona um espaço entre eles */
+    }
+
+    header .logo h1 {
+        font-size: 1.8rem; /* Diminui um pouco o nome da rádio */
+    }
+
+    header nav ul {
+        gap: 20px; /* Diminui o espaço entre os links do menu */
+    }
+
+    /* --- AJUSTES NO PLAYER PRINCIPAL --- */
+    main {
+        padding: 2rem 1rem; /* Diminui o espaçamento lateral */
+    }
+
+    .player-container {
+        padding: 30px 20px; /* Diminui o preenchimento interno do player */
+    }
+
+    .main-player-logo {
+        width: 120px; /* Diminui o tamanho da logo */
+        height: 120px;
+    }
+
+    .player-container h2 {
+        font-size: 1.3rem; /* Diminui o título "No Ar Agora" */
+    }
+
+    .player-container p {
+        font-size: 1rem; /* Diminui o subtítulo */
+    }
+
+    /* --- AJUSTES NAS PÁGINAS DE CONTEÚDO --- */
+    .content-section {
+        padding: 2rem 0; /* Diminui o espaçamento */
+    }
+
+    .team-member, .feature-box {
+        padding: 1rem; /* Diminui o padding das caixas */
+    }
+
+    /* --- AJUSTES NO RODAPÉ --- */
+    footer .container {
+        flex-direction: column; /* Coloca os itens um em cima do outro */
+        gap: 15px; /* Adiciona um espaço vertical entre eles */
+    }
+
+    .social-links, .footer-spacer {
+        min-width: auto; /* Remove a largura mínima para não quebrar o layout */
+    }
+
+    /* Esconde o espaçador invisível no celular, pois não é mais necessário */
+    .footer-spacer {
+        display: none;
+    }
+}
