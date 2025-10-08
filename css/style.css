@@ -8,6 +8,11 @@
     --cor-cinza-escuro: #222;
     --cor-cinza-claro: #f4f4f4;
     --cor-texto: #ffffff;
+    /* NOVAS VARIÁVEIS PARA OS ÍCONES SOCIAIS */
+    --cor-instagram: #E1306C;
+    --cor-instagram-hover: #C13584;
+    --cor-whatsapp: #25D366;
+    --cor-whatsapp-hover: #128C7E;
 }
 
 /* Estilos Gerais */
@@ -239,7 +244,6 @@ footer {
     background: var(--cor-cinza-escuro);
     color: #aaa;
     text-align: center;
-    /* Aumentando a altura do rodapé com padding */
     padding: 1.5rem 0; 
     margin-top: auto;
     border-top: 1px solid #333; /* Adiciona uma linha sutil de separação */
@@ -259,6 +263,9 @@ footer p {
     padding: 0;
 }
 
+.social-links{
+    gap: 20px;
+}
 .social-links a {
     display: inline-flex;
     align-items: center;
@@ -266,7 +273,6 @@ footer p {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background-color: var(--cor-instagram);
     color: var(--cor-texto);
     font-size: 1.5rem;
     text-decoration: none;
@@ -275,13 +281,32 @@ footer p {
 }
 
 .social-links a:hover {
-    background-color: var(--cor-instagram-hover);
     transform: scale(1.1);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
 }
 
+/* Estilo ESPECÍFICO para o botão de Instagram */
+.social-links .btn-instagram {
+    background-color: var(--cor-instagram);
+}
+.social-links .btn-instagram:hover {
+    background-color: var(--cor-instagram-hover);
+}
+
+/* NOVO: Estilo ESPECÍFICO para o botão de WhatsApp */
+.social-links .btn-whatsapp {
+    background-color: var(--cor-whatsapp);
+}
+.social-links .btn-whatsapp:hover {
+    background-color: var(--cor-whatsapp-hover);
+}
+
+/* O truque final: o espaçador invisível */
 .social-links, .footer-spacer {
-    min-width: 40px; 
+    /* Garante que os lados tenham a mesma largura para o texto ficar centralizado.
+       Aumentamos um pouco para caber os dois botões */
+    min-width: 95px; 
+    display: flex; /* Adicionado para alinhar corretamente */
 }
 /*SOBRE NOS*/
 
