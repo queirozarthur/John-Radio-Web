@@ -304,12 +304,19 @@ footer p {
     background-color: var(--cor-whatsapp-hover);
 }
 
+.social-links .btn-email {
+    background-color: #777; /* Cor cinza para o e-mail */
+}
+.social-links .btn-email:hover {
+    background-color: #999; /* Cinza mais claro no hover */
+}
+
 /* O truque final: o espaçador invisível */
 .social-links, .footer-spacer {
-    /* Garante que os lados tenham a mesma largura para o texto ficar centralizado.
-       Aumentamos um pouco para caber os dois botões */
-    min-width: 95px; 
-    display: flex; /* Adicionado para alinhar corretamente */
+    /* Ajustamos a largura para compensar o terceiro botão e manter o texto centralizado.
+       3 botões x 40px + 2 vãos x 15px = 120 + 30 = 150px */
+    min-width: 150px; 
+    display: flex; 
 }
 /*SOBRE NOS*/
 
