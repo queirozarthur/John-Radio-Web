@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const playIcon = '<i class="fas fa-play"></i>';
     const pauseIcon = '<i class="fas fa-pause"></i>';
 
-    // !!! IMPORTANTE: COLOQUE A URL DO SEU STREAMING AQUI !!!
+    // !!! VERIFIQUE SE SUA URL DE STREAMING ESTÁ CORRETA AQUI !!!
     const streamURL = 'https://stm10.conectastreaming.com:7150/stream';
 
     // Configura a URL do streaming no elemento de áudio
@@ -18,33 +18,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Função para tocar ou pausar a música e alternar o ícone
     function togglePlayPause() {
-        // Verifica se o áudio está pausado ou se já terminou
         if (audioPlayer.paused || audioPlayer.ended) {
-            // Se estiver pausado, toca a música
             audioPlayer.play().catch(error => console.error("Erro ao tentar tocar o áudio:", error));
-            // E troca o ícone do botão para o de PAUSE
             playPauseBtn.innerHTML = pauseIcon;
         } else {
-            // Se estiver tocando, pausa a música
             audioPlayer.pause();
-            // E troca o ícone do botão de volta para o de PLAY
             playPauseBtn.innerHTML = playIcon;
         }
     }
 
     // Função para ajustar o volume
     function setVolume() {
-        // O volume do HTML audio vai de 0.0 a 1.0
-        // O slider vai de 0 a 100, por isso dividimos por 100
         audioPlayer.volume = volumeSlider.value / 100;
     }
 
-    // Adiciona "escutadores" de eventos para acionar as funções
+    // Adiciona o "escutador" para o botão de play/pause
     playPauseBtn.addEventListener('click', togglePlayPause);
     
     // ================== A CORREÇÃO ESTÁ AQUI ==================
-    // Para garantir máxima compatibilidade em celulares, vamos escutar os dois eventos:
-    // 'input' (enquanto arrasta) e 'change' (quando solta).
+    // Para garantir máxima compatibilidade em celulares, ouvimos os dois eventos:
+    // 'input' (dispara enquanto arrasta) e 'change' (dispara quando solta).
+    // Esta é a solução definitiva para o problema no celular.
     volumeSlider.addEventListener('input', setVolume);
     volumeSlider.addEventListener('change', setVolume);
     // ==========================================================
