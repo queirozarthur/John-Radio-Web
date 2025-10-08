@@ -1,5 +1,4 @@
 /* Importando uma fonte para um visual mais moderno */
-
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
 
 /* Variáveis de Cores */
@@ -45,6 +44,21 @@ header .container {
     align-items: center;
 }
 
+header .logo { /* Estilo para o link da logo no cabeçalho */
+    display: flex; /* Para alinhar a imagem e o texto */
+    align-items: center;
+    text-decoration: none;
+}
+
+.header-logo {
+    width: 40px; /* Tamanho da logo no cabeçalho */
+    height: 40px;
+    margin-right: 10px;
+    border-radius: 50%; /* Para deixá-la circular */
+    object-fit: cover;
+    border: 1px solid var(--cor-amarelo); /* Borda sutil */
+}
+
 header .logo h1 {
     color: var(--cor-texto);
     font-size: 2rem;
@@ -55,6 +69,7 @@ header .logo span {
 }
 
 header nav ul {
+    gap: 35px;
     list-style: none;
     display: flex;
 }
@@ -107,7 +122,31 @@ main {
     text-align: center;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     border: 1px solid #333;
+    position: relative; /* Necessário para o efeito de brilho da logo */
 }
+
+/* LOGO PRINCIPAL DO PLAYER */
+.main-player-logo {
+    width: 150px; /* Tamanho maior para destaque */
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border: 1px solid var(--cor-amarelo); /* Borda amarela mais grossa */
+    /* Efeito de brilho pulsante */
+    box-shadow: 0 0 20px 5px rgba(255, 193, 7, 0.7);
+    animation: pulse 2s infinite alternate; /* Animação de pulsar */
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 15px 3px rgba(255, 193, 7, 0.5);
+    }
+    100% {
+        box-shadow: 0 0 30px 8px rgba(255, 193, 7, 0.9);
+    }
+}
+
 
 .player-container h2 {
     color: var(--cor-amarelo);
@@ -136,25 +175,23 @@ main {
     height: 70px;
     font-size: 2rem;
     cursor: pointer;
-    /* Adicionado para centralizar o ícone de play/pause */
     display: flex;
     justify-content: center;
     align-items: center;
-    /* Transições mais suaves para o tamanho E para o brilho */
     transition: transform 0.3s ease, box-shadow 0.4s ease; 
-    /* Brilho (glow) inicial constante */
     box-shadow: 0 0 15px 3px rgba(255, 193, 7, 0.5); 
 }
 
 .controls .play-btn:hover {
     transform: scale(1.1);
-    box-shadow: 0 0 15px 8px rgba(228, 172, 6, 0.9); 
+    box-shadow: 0 0 25px 8px rgba(255, 193, 7, 0.9); 
 }
 
 .volume-control {
     display: flex;
     align-items: center;
     gap: 10px;
+    color: var(--cor-amarelo); /* Cor dos ícones de volume */
 }
 
 .volume-control input[type="range"] {
@@ -165,6 +202,7 @@ main {
     background: #555;
     border-radius: 5px;
     cursor: pointer;
+    outline: none; /* Remove a borda azul ao focar */
 }
 
 .volume-control input[type="range"]::-webkit-slider-thumb {
@@ -174,9 +212,14 @@ main {
     height: 15px;
     background: var(--cor-amarelo);
     border-radius: 50%;
+    transition: background 0.3s ease;
+}
+.volume-control input[type="range"]::-webkit-slider-thumb:hover {
+    background: #ffd700; /* Um amarelo um pouco mais claro no hover */
 }
 
-/* Página "Sobre" */
+
+/* Página "Sobre" (Mantido para referência) */
 .content-section {
     padding: 2rem 0;
 }
