@@ -1,0 +1,175 @@
+/* Importando uma fonte para um visual mais moderno */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+
+/* Variáveis de Cores */
+:root {
+    --cor-amarelo: #ffc107;
+    --cor-preto: #121212;
+    --cor-cinza-escuro: #222;
+    --cor-cinza-claro: #f4f4f4;
+    --cor-texto: #ffffff;
+}
+
+/* Estilos Gerais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--cor-preto);
+    color: var(--cor-texto);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 0 20px;
+    overflow: hidden;
+}
+
+/* Header e Navegação */
+header {
+    background: var(--cor-cinza-escuro);
+    padding: 1rem 0;
+    border-bottom: 3px solid var(--cor-amarelo);
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .logo h1 {
+    color: var(--cor-texto);
+    font-size: 2rem;
+}
+
+header .logo span {
+    color: var(--cor-amarelo);
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+}
+
+header nav ul li a {
+    color: var(--cor-texto);
+    text-decoration: none;
+    padding: 10px 15px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+header nav ul li a:hover,
+header nav ul li a.active {
+    color: var(--cor-amarelo);
+}
+
+/* Player de Música */
+main {
+    min-height: calc(100vh - 150px); /* Garante que o footer fique no final */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 0;
+}
+
+
+.player-container {
+    background: var(--cor-cinza-escuro);
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 1px solid #333;
+}
+
+.player-container h2 {
+    color: var(--cor-amarelo);
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+
+.player-container p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+.controls .play-btn {
+    background: var(--cor-amarelo);
+    color: var(--cor-preto);
+    border: none;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.controls .play-btn:hover {
+    transform: scale(1.1);
+}
+
+.volume-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.volume-control input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 120px;
+    height: 5px;
+    background: #555;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.volume-control input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    background: var(--cor-amarelo);
+    border-radius: 50%;
+}
+
+/* Página "Sobre" */
+.content-section {
+    padding: 2rem 0;
+}
+.content-section h2 {
+    color: var(--cor-amarelo);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+.content-section p {
+    margin-bottom: 1rem;
+    text-align: justify;
+}
+
+
+/* Footer */
+footer {
+    background: var(--cor-cinza-escuro);
+    color: #aaa;
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: auto;
+}
