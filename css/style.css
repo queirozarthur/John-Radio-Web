@@ -64,11 +64,29 @@ header nav ul li a {
     text-decoration: none;
     padding: 10px 15px;
     font-weight: bold;
+    padding: 5px 0; /* Adicionado para ter espaço para o efeito de brilho */
+    position: relative; /* Necessário para posicionar o "brilho" */
     transition: color 0.3s ease;
 }
 
-header nav ul li a:hover,
-header nav ul li a.active {
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0%;
+    height: 2px;
+    background-color: var(--cor-amarelo);
+    transition: width 0.3s ease-out;
+}
+
+nav ul li a:hover::after,
+nav ul li a.active::after {
+    width: 100%;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
     color: var(--cor-amarelo);
 }
 
@@ -110,7 +128,7 @@ main {
 }
 
 .controls .play-btn {
-    background: var(--cor-amarelo);
+    background-color: var(--cor-amarelo);
     color: var(--cor-preto);
     border: none;
     border-radius: 50%;
@@ -118,11 +136,19 @@ main {
     height: 70px;
     font-size: 2rem;
     cursor: pointer;
-    transition: transform 0.2s ease;
+    /* Adicionado para centralizar o ícone de play/pause */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Transições mais suaves para o tamanho E para o brilho */
+    transition: transform 0.3s ease, box-shadow 0.4s ease; 
+    /* Brilho (glow) inicial constante */
+    box-shadow: 0 0 15px 3px rgba(255, 193, 7, 0.5); 
 }
 
 .controls .play-btn:hover {
     transform: scale(1.1);
+    box-shadow: 0 0 15px 8px rgba(228, 172, 6, 0.9); 
 }
 
 .volume-control {
