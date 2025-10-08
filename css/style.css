@@ -145,11 +145,13 @@ main {
 }
 
 @keyframes pulse {
-    0% {
-        box-shadow: 0 0 15px 3px rgba(255, 193, 7, 0.5);
+    from {
+        transform: scale(1); /* Tamanho normal */
+        box-shadow: 0 0 20px 5px rgba(255, 193, 7, 0.6);
     }
-    100% {
-        box-shadow: 0 0 30px 8px rgba(255, 193, 7, 0.9);
+    to {
+        transform: scale(1.05); /* Aumenta levemente o tamanho */
+        box-shadow: 0 0 30px 10px rgba(255, 193, 7, 0.8);
     }
 }
 
