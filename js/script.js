@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Configura a URL do streaming no elemento de áudio
     audioPlayer.src = streamURL;
 
-    // --- A MÁGICA ACONTECE AQUI ---
     // Função para tocar ou pausar a música e alternar o ícone
     function togglePlayPause() {
         // Verifica se o áudio está pausado ou se já terminou
@@ -41,11 +40,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Adiciona "escutadores" de eventos para acionar as funções
-    // Quando o botão de play/pause for clicado, chama a função togglePlayPause
     playPauseBtn.addEventListener('click', togglePlayPause);
     
-    // Quando a barrinha de volume for arrastada, chama a função setVolume
+    // ================== A CORREÇÃO ESTÁ AQUI ==================
+    // Para garantir máxima compatibilidade em celulares, vamos escutar os dois eventos:
+    // 'input' (enquanto arrasta) e 'change' (quando solta).
     volumeSlider.addEventListener('input', setVolume);
+    volumeSlider.addEventListener('change', setVolume);
+    // ==========================================================
 
     // Ajusta o volume inicial assim que a página carrega
     setVolume();
