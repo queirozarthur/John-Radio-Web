@@ -1,21 +1,25 @@
-/* Importando uma fonte para um visual mais moderno */
+/* =================================== */
+/* CONFIGURAÇÕES GLOBAIS E VARIÁVEIS  */
+/* =================================== */
+
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
 
-/* Variáveis de Cores */
 :root {
     --cor-amarelo: #ffc107;
     --cor-preto: #121212;
     --cor-cinza-escuro: #222;
-    --cor-cinza-claro: #f4f4f4;
     --cor-texto: #ffffff;
-    /* NOVAS VARIÁVEIS PARA OS ÍCONES SOCIAIS */
     --cor-instagram: #E1306C;
     --cor-instagram-hover: #C13584;
     --cor-whatsapp: #25D366;
     --cor-whatsapp-hover: #128C7E;
 }
 
-/* Estilos Gerais */
+/* Habilita a rolagem suave na página inteira */
+html {
+    scroll-behavior: smooth;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -34,14 +38,20 @@ body {
     max-width: 1100px;
     margin: auto;
     padding: 0 20px;
-    overflow: hidden;
 }
 
-/* Header e Navegação */
+/* =================================== */
+/* HEADER E NAVEGAÇÃO                  */
+/* =================================== */
+
 header {
     background: var(--cor-cinza-escuro);
     padding: 1rem 0;
     border-bottom: 3px solid var(--cor-amarelo);
+    /* Deixa o cabeçalho fixo no topo durante a rolagem */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 header .container {
@@ -50,19 +60,19 @@ header .container {
     align-items: center;
 }
 
-header .logo { /* Estilo para o link da logo no cabeçalho */
-    display: flex; /* Para alinhar a imagem e o texto */
+header .logo {
+    display: flex;
     align-items: center;
     text-decoration: none;
 }
 
 .header-logo {
-    width: 40px; /* Tamanho da logo no cabeçalho */
+    width: 40px;
     height: 40px;
     margin-right: 10px;
-    border-radius: 50%; /* Para deixá-la circular */
+    border-radius: 50%;
     object-fit: cover;
-    border: 1px solid var(--cor-amarelo); /* Borda sutil */
+    border: 1px solid var(--cor-amarelo);
 }
 
 header .logo h1 {
@@ -75,22 +85,21 @@ header .logo span {
 }
 
 header nav ul {
-    gap: 35px;
     list-style: none;
     display: flex;
+    gap: 35px;
 }
 
 header nav ul li a {
     color: var(--cor-texto);
     text-decoration: none;
-    padding: 10px 15px;
     font-weight: bold;
-    padding: 5px 0; /* Adicionado para ter espaço para o efeito de brilho */
-    position: relative; /* Necessário para posicionar o "brilho" */
+    padding: 5px 0;
+    position: relative;
     transition: color 0.3s ease;
 }
 
-nav ul li a::after {
+header nav ul li a::after {
     content: '';
     position: absolute;
     left: 0;
@@ -101,25 +110,33 @@ nav ul li a::after {
     transition: width 0.3s ease-out;
 }
 
-nav ul li a:hover::after,
-nav ul li a.active::after {
+header nav ul li a:hover::after,
+header nav ul li a.active::after {
     width: 100%;
 }
 
-nav ul li a:hover,
-nav ul li a.active {
+header nav ul li a:hover,
+header nav ul li a.active {
     color: var(--cor-amarelo);
 }
 
-/* Player de Música */
+
+/* =================================== */
+/* SEÇÕES PRINCIPAIS (MAIN)            */
+/* =================================== */
+
 main {
-    min-height: calc(100vh - 150px); /* Garante que o footer fique no final */
+    /* Main agora é apenas um container para as seções */
+}
+
+.player-section {
+    /* Faz a seção do player ocupar pelo menos a altura da tela (menos o cabeçalho) */
+    min-height: calc(100vh - 81px); /* 81px é a altura aproximada do header */
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 2rem 0;
+    padding: 2rem;
 }
-
 
 .player-container {
     background: var(--cor-cinza-escuro);
@@ -128,33 +145,20 @@ main {
     text-align: center;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     border: 1px solid #333;
-    position: relative; /* Necessário para o efeito de brilho da logo */
+    position: relative;
 }
 
-/* LOGO PRINCIPAL DO PLAYER */
 .main-player-logo {
-    width: 150px; /* Tamanho maior para destaque */
+    width: 150px;
     height: 150px;
     border-radius: 50%;
     object-fit: cover;
     margin-bottom: 20px;
-    border: 1px solid var(--cor-amarelo); /* Borda amarela mais grossa */
-    /* Efeito de brilho pulsante */
+    border: 3px solid var(--cor-amarelo);
     box-shadow: 0 0 20px 5px rgba(255, 193, 7, 0.7);
-    animation: pulse 2s infinite alternate; /* Animação de pulsar */
+    animation: pulse 2s infinite alternate;
+    will-change: transform, box-shadow;
 }
-
-@keyframes pulse {
-    from {
-        transform: scale(1); /* Tamanho normal */
-        box-shadow: 0 0 20px 5px rgba(255, 193, 7, 0.6);
-    }
-    to {
-        transform: scale(1.05); /* Aumenta levemente o tamanho */
-        box-shadow: 0 0 30px 10px rgba(255, 193, 7, 0.8);
-    }
-}
-
 
 .player-container h2 {
     color: var(--cor-amarelo);
@@ -164,7 +168,14 @@ main {
 
 .player-container p {
     font-size: 1.2rem;
-    margin-bottom: 30px;
+    margin-bottom: 0; /* Margin removida para dar espaço ao visualizador */
+}
+
+/* NOVO: Estilo para o visualizador de áudio */
+#visualizer {
+    width: 250px;
+    height: 60px;
+    margin: 25px auto;
 }
 
 .controls {
@@ -186,142 +197,49 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: transform 0.3s ease, box-shadow 0.4s ease; 
-    box-shadow: 0 0 15px 3px rgba(255, 193, 7, 0.5); 
+    transition: transform 0.3s ease, box-shadow 0.4s ease;
+    box-shadow: 0 0 15px 3px rgba(255, 193, 7, 0.5);
 }
 
 .controls .play-btn:hover {
     transform: scale(1.1);
-    box-shadow: 0 0 25px 8px rgba(255, 193, 7, 0.9); 
+    box-shadow: 0 0 25px 8px rgba(255, 193, 7, 0.9);
 }
 
+/* NOVO: Estilo para os botões de volume */
 .volume-control {
     display: flex;
     align-items: center;
-    gap: 10px;
-    color: var(--cor-amarelo); /* Cor dos ícones de volume */
+    gap: 8px;
 }
 
-.volume-control input[type="range"] {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 120px;
-    height: 5px;
-    background: #555;
-    border-radius: 5px;
-    cursor: pointer;
-    outline: none; /* Remove a borda azul ao focar */
-}
-
-.volume-control input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 15px;
-    height: 15px;
-    background: var(--cor-amarelo);
-    border-radius: 50%;
-    transition: background 0.3s ease;
-}
-.volume-control input[type="range"]::-webkit-slider-thumb:hover {
-    background: #ffd700; /* Um amarelo um pouco mais claro no hover */
-}
-
-
-/* Página "Sobre" (Mantido para referência) */
-.content-section {
-    padding: 2rem 0;
-}
-.content-section h2 {
+.volume-control button {
+    background: transparent;
+    border: 2px solid var(--cor-amarelo);
     color: var(--cor-amarelo);
-    margin-bottom: 1rem;
-    text-align: center;
-}
-.content-section p {
-    margin-bottom: 1rem;
-    text-align: justify;
-}
-
-
-/* Footer */
-footer {
-    background: var(--cor-cinza-escuro);
-    color: #aaa;
-    text-align: center;
-    padding: 1.5rem 0; 
-    margin-top: auto;
-    border-top: 1px solid #333; /* Adiciona uma linha sutil de separação */
-}
-
-footer .container {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    font-size: 0.9rem;
+    cursor: pointer;
     display: flex;
-    /* Alinha os itens: um na esquerda, um no centro, um na direita */
-    justify-content: space-between; 
-    /* Centraliza verticalmente todos os itens (seu pedido de 50% da altura) */
-    align-items: center; 
-}
-
-/* Garante que o texto não fique muito grande */
-footer p {
-    margin: 0;
-    padding: 0;
-}
-
-.social-links{
-    gap: 20px;
-}
-.social-links a {
-    display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    color: var(--cor-texto);
-    font-size: 1.5rem;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.social-links a:hover {
-    transform: scale(1.1);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
+.volume-control button:hover {
+    background-color: var(--cor-amarelo);
+    color: var(--cor-preto);
 }
 
-/* Estilo ESPECÍFICO para o botão de Instagram */
-.social-links .btn-instagram {
-    background-color: var(--cor-instagram);
-}
-.social-links .btn-instagram:hover {
-    background-color: var(--cor-instagram-hover);
-}
-
-/* NOVO: Estilo ESPECÍFICO para o botão de WhatsApp */
-.social-links .btn-whatsapp {
-    background-color: var(--cor-whatsapp);
-}
-.social-links .btn-whatsapp:hover {
-    background-color: var(--cor-whatsapp-hover);
-}
-
-.social-links .btn-email {
-    background-color: #777; /* Cor cinza para o e-mail */
-}
-.social-links .btn-email:hover {
-    background-color: #999; /* Cinza mais claro no hover */
-}
-
-/* O truque final: o espaçador invisível */
-.social-links, .footer-spacer {
-    /* Ajustamos a largura para compensar o terceiro botão e manter o texto centralizado.
-       3 botões x 40px + 2 vãos x 15px = 120 + 30 = 150px */
-    min-width: 150px; 
-    display: flex; 
-}
-/*SOBRE NOS*/
+/* =================================== */
+/* SEÇÃO DE CONTEÚDO "SOBRE"           */
+/* =================================== */
 
 .content-section {
-    padding: 4rem 0;
+    padding: 4rem 20px;
+    background-color: #1a1a1a; /* Cor de fundo ligeiramente diferente para separar as seções */
 }
 
 .content-section h2 {
@@ -331,64 +249,13 @@ footer p {
     margin-bottom: 1rem;
 }
 
-.content-section p {
+.content-section > .container > p {
     color: #ccc;
     text-align: justify;
     max-width: 800px;
-    margin: 0 auto 1.5rem auto; /* Centraliza o parágrafo */
+    margin: 0 auto 1.5rem auto;
     line-height: 1.8;
 }
-
-.team-title {
-    margin-top: 3rem; /* Espaço extra acima do título da equipe */
-}
-
-.team-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Layout responsivo */
-    gap: 2rem;
-    margin-top: 2rem;
-}
-
-.team-member {
-    background-color: var(--cor-cinza-escuro);
-    border-radius: 10px;
-    text-align: center;
-    padding: 1.5rem;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.team-member:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 8px 25px rgba(255, 193, 7, 0.3);
-}
-
-.team-member img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid var(--cor-amarelo);
-    margin-bottom: 1rem;
-}
-
-.team-member h3 {
-    color: var(--cor-texto);
-    font-size: 1.25rem;
-    margin-bottom: 0.5rem;
-}
-
-.team-member p {
-    color: #aaa;
-    font-size: 0.9rem;
-    text-align: center; /* Centraliza a descrição do locutor */
-    line-height: 1.5;
-}
-
-/* =================================== */
-/* ESTILOS DAS CAIXAS DE PROGRAMAÇÃO */
-/* =================================== */
 
 .features-grid {
     display: grid;
@@ -401,7 +268,7 @@ footer p {
     background-color: var(--cor-cinza-escuro);
     padding: 2rem;
     border-radius: 8px;
-    border-left: 4px solid var(--cor-amarelo); /* Destaque lateral amarelo */
+    border-left: 4px solid var(--cor-amarelo);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -421,79 +288,148 @@ footer p {
     color: #ccc;
     font-size: 1rem;
     line-height: 1.7;
-    text-align: left; /* Alinha o texto à esquerda dentro da caixa */
-    margin: 0; /* Remove a margem padrão do parágrafo */
+    text-align: left;
+    margin: 0;
 }
+
+/* =================================== */
+/* FOOTER (RODAPÉ)                     */
+/* =================================== */
+
+footer {
+    background: var(--cor-cinza-escuro);
+    color: #aaa;
+    text-align: center;
+    padding: 1.5rem 0;
+    margin-top: auto;
+    border-top: 1px solid #333;
+}
+
+footer .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+footer p {
+    margin: 0;
+    padding: 0;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+}
+
+.social-links a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: var(--cor-texto);
+    font-size: 1.5rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+.social-links a:hover {
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
+}
+
+.social-links .btn-instagram { background-color: var(--cor-instagram); }
+.social-links .btn-instagram:hover { background-color: var(--cor-instagram-hover); }
+
+.social-links .btn-whatsapp { background-color: var(--cor-whatsapp); }
+.social-links .btn-whatsapp:hover { background-color: var(--cor-whatsapp-hover); }
+
+.social-links .btn-email { background-color: #777; }
+.social-links .btn-email:hover { background-color: #999; }
+
+.social-links, .footer-spacer {
+    min-width: 150px;
+    display: flex;
+}
+
+/* =================================== */
+/* ANIMAÇÕES                           */
+/* =================================== */
 
 @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes pulse {
     from {
-        opacity: 0;
-        transform: translateY(10px); /* Começa um pouco abaixo */
+        transform: scale(1);
+        box-shadow: 0 0 20px 5px rgba(255, 193, 7, 0.6);
     }
     to {
-        opacity: 1;
-        transform: translateY(0); /* Termina na posição normal */
+        transform: scale(1.05);
+        box-shadow: 0 0 30px 10px rgba(255, 193, 7, 0.8);
     }
 }
 
-@media (max-width: 768px) {
+/* =================================== */
+/* ESTILOS PARA TELAS MENORES       */
+/* =================================== */
 
-    /* --- AJUSTES NO CABEÇALHO --- */
+@media (max-width: 1000px) {
     header .container {
-        flex-direction: column; /* Coloca a logo e o menu um em cima do outro */
-        gap: 15px; /* Adiciona um espaço entre eles */
+        flex-direction: column;
+        gap: 15px;
     }
 
     header .logo h1 {
-        font-size: 1.8rem; /* Diminui um pouco o nome da rádio */
+        font-size: 1.8rem;
     }
 
     header nav ul {
-        gap: 20px; /* Diminui o espaço entre os links do menu */
+        gap: 20px;
     }
 
-    /* --- AJUSTES NO PLAYER PRINCIPAL --- */
-    main {
-        padding: 2rem 1rem; /* Diminui o espaçamento lateral */
+    .player-section {
+        padding: 2rem 1rem;
     }
 
     .player-container {
-        padding: 30px 20px; /* Diminui o preenchimento interno do player */
+        padding: 30px 20px;
     }
 
     .main-player-logo {
-        width: 120px; /* Diminui o tamanho da logo */
+        width: 120px;
         height: 120px;
     }
 
     .player-container h2 {
-        font-size: 1.3rem; /* Diminui o título "No Ar Agora" */
+        font-size: 1.3rem;
     }
 
     .player-container p {
-        font-size: 1rem; /* Diminui o subtítulo */
+        font-size: 1rem;
     }
 
-    /* --- AJUSTES NAS PÁGINAS DE CONTEÚDO --- */
     .content-section {
-        padding: 2rem 0; /* Diminui o espaçamento */
+        padding: 2rem 1rem;
     }
 
-    .team-member, .feature-box {
-        padding: 1rem; /* Diminui o padding das caixas */
+    .feature-box {
+        padding: 1.5rem;
     }
 
-    /* --- AJUSTES NO RODAPÉ --- */
     footer .container {
-        flex-direction: column; /* Coloca os itens um em cima do outro */
-        gap: 15px; /* Adiciona um espaço vertical entre eles */
+        flex-direction: column;
+        gap: 15px;
     }
 
     .social-links, .footer-spacer {
-        min-width: auto; /* Remove a largura mínima para não quebrar o layout */
+        min-width: auto;
     }
 
-    /* Esconde o espaçador invisível no celular, pois não é mais necessário */
     .footer-spacer {
         display: none;
     }

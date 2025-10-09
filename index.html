@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Início - JohnRadioWeb</title>
+    <title>JohnRadioWeb - A Sua Sintonia!</title>
     <link rel="icon" type="image/png" href="imagens/logo.png">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
@@ -12,43 +12,75 @@
 
     <header>
         <div class="container">
-            <a href="index.html" class="logo">
+            <a href="#player" class="logo">
                 <img src="imagens/logo.png" alt="Logo JohnRadioWeb" class="header-logo">
                 <h1>John<span>RadioWeb</span></h1>
             </a>
             <nav>
                 <ul>
-                    <li><a href="index.html" class="active">Início</a></li>
-                    <li><a href="sobre.html">Sobre Nós</a></li>
-                    </ul>
+                    <li><a href="#player" class="active">Início</a></li>
+                    <li><a href="#sobre">Sobre Nós</a></li>
+                </ul>
             </nav>
         </div>
     </header>
 
     <main>
-        <section class="player-section">
+        <section id="player" class="player-section">
             <div class="player-container">
-                <img src="imagens/logo.png" height="5px" alt="Logo JohnRadioWeb" class="main-player-logo">
+                <img src="imagens/logo.png" alt="Logo JohnRadioWeb" class="main-player-logo">
                 <h2>No Ar Agora</h2>
                 <p id="current-song">O melhor da música você ouve aqui!</p>
                 
-                <audio id="audio-player" preload="metadata"></audio>
+                <audio id="audio-player" preload="metadata" crossOrigin="anonymous"></audio>
+
+                <canvas id="visualizer"></canvas>
 
                 <div class="controls">
                     <button id="play-pause-btn" class="play-btn">
                         <i class="fas fa-play"></i>
                     </button>
                     <div class="volume-control">
-                        <i class="fas fa-volume-down"></i>
-                        <input type="range" id="volume-slider" min="0" max="100" value="80">
-                        <i class="fas fa-volume-up"></i>
+                        <button id="mute-btn" aria-label="Silenciar">
+                            <i class="fas fa-volume-up"></i>
+                        </button>
+                        <button id="vol-down-btn" aria-label="Diminuir volume">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <button id="vol-up-btn" aria-label="Aumentar volume">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="sobre" class="content-section">
+            <div class="container">
+                <h2>Nossa programação musical</h2>
+                <p>
+                    Na JOHN RÁDIO WEB, a diversidade musical é nossa marca registrada. Oferecemos uma seleção cuidadosa que transita por diferentes estilos e épocas, garantindo que sempre haja algo especial tocando para você. Nossa programação é pensada para emocionar, entreter e surpreender a cada momento.
+                </p>
+
+                <div class="features-grid">
+                    <div class="feature-box">
+                        <h3>Variedade de Gêneros</h3>
+                        <p>Do pop ao rock, do samba ao eletrônico, do jazz à música sertaneja. Navegamos por todos os estilos musicais para garantir que sua playlist nunca seja monótona e sempre surpreenda.</p>
+                    </div>
+                    <div class="feature-box">
+                        <h3>Artistas em Destaque</h3>
+                        <p>Destacamos tanto talentos nacionais quanto estrelas internacionais em alta. Acompanhe os lançamentos mais quentes e redescubra clássicos inesquecíveis que marcaram gerações.</p>
+                    </div>
+                    <div class="feature-box">
+                        <h3>Programas Especiais</h3>
+                        <p>Curadoria temática refinada com programas exclusivos e participações de convidados especiais. Cada programa é uma jornada musical única, criada com carinho para os verdadeiros amantes da boa música.</p>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
-     <footer>
+    <footer>
         <div class="container">
             <div class="social-links">
                 <a href="https://www.instagram.com/johnradioweb/" target="_blank" class="btn-instagram" aria-label="Instagram">
@@ -61,9 +93,7 @@
                     <i class="fas fa-envelope"></i>
                 </a>
             </div>
-
             <p>&copy; 2025 JohnRadioWeb. Todos os direitos reservados.</p>
-
             <div class="footer-spacer"></div>
         </div>
     </footer>

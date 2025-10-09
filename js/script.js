@@ -1,23 +1,73 @@
-// Aguarda o documento HTML ser completamente carregado
 document.addEventListener('DOMContentLoaded', () => {
-
-    // Seleciona os elementos do player no HTML pelos seus IDs
+    // --- SELEÇÃO DOS ELEMENTOS ---
     const audioPlayer = document.getElementById('audio-player');
     const playPauseBtn = document.getElementById('play-pause-btn');
-    const volumeSlider = document.getElementById('volume-slider');
+    const muteBtn = document.getElementById('mute-btn');
+    const volDownBtn = document.getElementById('vol-down-btn');
+    const volUpBtn = document.getElementById('vol-up-btn');
+    
+    // Elementos do visualizador
+    const canvas = document.getElementById('visualizer');
+    const canvasCtx = canvas.getContext('2d');
 
-    // Define os ícones de Play e Pause para facilitar a troca
+    // --- ÍCONES ---
     const playIcon = '<i class="fas fa-play"></i>';
     const pauseIcon = '<i class="fas fa-pause"></i>';
+    const volumeUpIcon = '<i class="fas fa-volume-up"></i>';
+    const volumeMuteIcon = '<i class="fas fa-volume-mute"></i>';
 
-    // !!! VERIFIQUE SE SUA URL DE STREAMING ESTÁ CORRETA AQUI !!!
+    // --- CONFIGURAÇÃO DO STREAMING ---
     const streamURL = 'https://stm10.conectastreaming.com:7150/stream';
-
-    // Configura a URL do streaming no elemento de áudio
     audioPlayer.src = streamURL;
+    audioPlayer.volume = 0.8;
 
-    // Função para tocar ou pausar a música e alternar o ícone
+    // --- LÓGICA DO VISUALIZADOR DE ÁUDIO ---
+    let audioContext;
+    let analyser;
+
+    function setupAudioContext() {
+        if (audioContext) return; // Inicializa apenas uma vez
+        
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const source = audioContext.createMediaElementSource(audioPlayer);
+        analyser = audioContext.createAnalyser();
+        
+        source.connect(analyser);
+        analyser.connect(audioContext.destination);
+        
+        analyser.fftSize = 128;
+        const bufferLength = analyser.frequencyBinCount;
+        const dataArray = new Uint8Array(bufferLength);
+
+        renderFrame();
+
+        function renderFrame() {
+            requestAnimationFrame(renderFrame); // Cria um loop
+            analyser.getByteFrequencyData(dataArray);
+
+            canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
+
+            const barWidth = (canvas.width / bufferLength) * 2;
+            let barHeight;
+            let x = 0;
+
+            for (let i = 0; i < bufferLength; i++) {
+                barHeight = dataArray[i] / 2;
+                
+                canvasCtx.fillStyle = '#ffc107'; // Cor amarela
+                canvasCtx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
+                
+                x += barWidth + 1; // Espaço entre as barras
+            }
+        }
+    }
+
+    // --- FUNÇÕES DE CONTROLE ---
     function togglePlayPause() {
+        if (!audioContext) {
+            setupAudioContext(); // Inicializa o visualizador no primeiro play
+        }
+
         if (audioPlayer.paused || audioPlayer.ended) {
             audioPlayer.play().catch(error => console.error("Erro ao tentar tocar o áudio:", error));
             playPauseBtn.innerHTML = pauseIcon;
@@ -27,22 +77,22 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Função para ajustar o volume
-    function setVolume() {
-        audioPlayer.volume = volumeSlider.value / 100;
+    function increaseVolume() {
+        if (audioPlayer.volume < 1.0) audioPlayer.volume = Math.min(1.0, audioPlayer.volume + 0.1);
     }
 
-    // Adiciona o "escutador" para o botão de play/pause
-    playPauseBtn.addEventListener('click', togglePlayPause);
-    
-    // ================== A CORREÇÃO ESTÁ AQUI ==================
-    // Para garantir máxima compatibilidade em celulares, ouvimos os dois eventos:
-    // 'input' (dispara enquanto arrasta) e 'change' (dispara quando solta).
-    // Esta é a solução definitiva para o problema no celular.
-    volumeSlider.addEventListener('input', setVolume);
-    volumeSlider.addEventListener('change', setVolume);
-    // ==========================================================
+    function decreaseVolume() {
+        if (audioPlayer.volume > 0.0) audioPlayer.volume = Math.max(0.0, audioPlayer.volume - 0.1);
+    }
 
-    // Ajusta o volume inicial assim que a página carrega
-    setVolume();
+    function toggleMute() {
+        audioPlayer.muted = !audioPlayer.muted;
+        muteBtn.innerHTML = audioPlayer.muted ? volumeMuteIcon : volumeUpIcon;
+    }
+
+    // --- "ESCUTADORES" DE EVENTOS ---
+    playPauseBtn.addEventListener('click', togglePlayPause);
+    volUpBtn.addEventListener('click', increaseVolume);
+    volDownBtn.addEventListener('click', decreaseVolume);
+    muteBtn.addEventListener('click', toggleMute);
 });
