@@ -126,7 +126,7 @@ header nav ul li a.active {
 /* =================================== */
 
 main {
-    /* Main agora é apenas um container para as seções */
+    
 }
 
 .player-section {
@@ -182,7 +182,7 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 30px;
+    gap: 40px;
 }
 
 .controls .play-btn {
@@ -431,6 +431,10 @@ footer p {
     }
 
     .footer-spacer {
+        display: none;
+    }
+    #vol-down-btn,
+    #vol-up-btn {
         display: none;
     }
 }
