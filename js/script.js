@@ -95,4 +95,73 @@ document.addEventListener('DOMContentLoaded', () => {
     volUpBtn.addEventListener('click', increaseVolume);
     volDownBtn.addEventListener('click', decreaseVolume);
     muteBtn.addEventListener('click', toggleMute);
+
+
+    // =================================== //
+    // NOVO CÓDIGO: LÓGICA DO MODAL        //
+    // =================================== //
+
+    const modal = document.getElementById('privacy-modal');
+    const openModalBtn = document.getElementById('open-modal-btn');
+    const closeModalBtn = document.querySelector('.close-btn');
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const contentPanels = document.querySelectorAll('.content-panel');
+
+    function showTab(tabName) {
+        contentPanels.forEach(panel => panel.classList.remove('active'));
+        tabBtns.forEach(btn => btn.classList.remove('active'));
+
+        const targetPanel = document.getElementById(tabName + '-content');
+        const targetBtn = document.querySelector(`.tab-btn[data-tab="${tabName}"]`);
+        
+        if (targetPanel && targetBtn) {
+            targetPanel.classList.add('active');
+            targetBtn.classList.add('active');
+            location.hash = tabName;
+        }
+    }
+
+    function openModal(initialTab = 'politica') {
+        if (modal) {
+            modal.style.display = 'block';
+            showTab(initialTab);
+        }
+    }
+
+    function closeModal() {
+        if (modal) {
+            modal.style.display = 'none';
+            history.pushState("", document.title, window.location.pathname + window.location.search);
+        }
+    }
+
+    if (openModalBtn) {
+        openModalBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const initialTab = e.target.hash.substring(1) || 'politica';
+            openModal(initialTab);
+        });
+    }
+
+    if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
+
+    window.addEventListener('click', (e) => {
+        if (e.target == modal) {
+            closeModal();
+        }
+    });
+
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const tabName = btn.getAttribute('data-tab');
+            showTab(tabName);
+        });
+    });
+
+    window.addEventListener('load', () => {
+        const currentHash = location.hash.substring(1);
+        if (currentHash === 'politica' || currentHash === 'termos') {
+            openModal(currentHash);
+        }
+    });
 });
