@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('visualizer');
     const canvasCtx = canvas.getContext('2d');
 
-    // --- ÍCONES ---
     const playIcon = '<i class="fas fa-play"></i>';
     const pauseIcon = '<i class="fas fa-pause"></i>';
     const volumeUpIcon = '<i class="fas fa-volume-up"></i>';
@@ -21,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     audioPlayer.src = streamURL;
     audioPlayer.volume = 0.8;
 
-    // --- LÓGICA DO VISUALIZADOR DE ÁUDIO ---
+    
     let audioContext;
     let analyser;
 
@@ -62,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- FUNÇÕES DE CONTROLE ---
+    
     function togglePlayPause() {
         if (!audioContext) {
             setupAudioContext(); // Inicializa o visualizador no primeiro play
@@ -90,16 +89,11 @@ document.addEventListener('DOMContentLoaded', () => {
         muteBtn.innerHTML = audioPlayer.muted ? volumeMuteIcon : volumeUpIcon;
     }
 
-    // --- "ESCUTADORES" DE EVENTOS ---
+    
     playPauseBtn.addEventListener('click', togglePlayPause);
     volUpBtn.addEventListener('click', increaseVolume);
     volDownBtn.addEventListener('click', decreaseVolume);
     muteBtn.addEventListener('click', toggleMute);
-
-
-    // =================================== //
-    // NOVO CÓDIGO: LÓGICA DO MODAL        //
-    // =================================== //
 
     const modal = document.getElementById('privacy-modal');
     const openModalBtn = document.getElementById('open-modal-btn');
