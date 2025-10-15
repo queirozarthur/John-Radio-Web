@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const volumeMuteIcon = '<i class="fas fa-volume-mute"></i>';
 
     // --- CONFIGURAÇÃO DO STREAMING ---
-    const streamURL = 'https://stm10.conectastreaming.com:7150/stream';
+    const streamURL = 'STREAM_URL';
     audioPlayer.src = streamURL;
     audioPlayer.volume = 0.8;
 
